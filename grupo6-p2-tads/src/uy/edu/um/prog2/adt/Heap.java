@@ -98,7 +98,7 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 		size++;
 	}
 
-	public void delete(int nPos) {
+	public void delete() {
 		elements[0] = elements[size - 1];
 		elements[size - 1] = null;
 		size--;
