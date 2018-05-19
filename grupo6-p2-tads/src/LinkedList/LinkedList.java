@@ -105,6 +105,7 @@ public class LinkedList<V> implements Lista<V>{
 		Nodo<V> temp = primero;
 		
 		while(temp != null) {
+			temp = temp.getNext();
 			exit++;
 		}
 		

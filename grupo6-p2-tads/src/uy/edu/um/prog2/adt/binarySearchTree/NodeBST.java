@@ -1,6 +1,6 @@
-package BinarySearchTree;
+package uy.edu.um.prog2.adt.binarySearchTree;
 
-import BinarySearchTree.FindException;
+import uy.edu.um.prog2.adt.binarySearchTree.FindException;
 import LinkedList.LinkedList;
 
 public class NodeBST <K extends Comparable<K>, T>{
@@ -163,6 +163,34 @@ public class NodeBST <K extends Comparable<K>, T>{
 		}	
 		
 	}
-
+	
+	public void preOrder(LinkedList<T> exit) {
+		
+		exit.addLast(getData());
+		
+		if(getLeftChild() != null) {
+			getLeftChild().preOrder(exit);		
+		}
+		
+		if(getRightChild() != null) {
+			getRightChild().preOrder(exit);		
+		}	
+		
+	}
+	
+	public void postOrder(LinkedList<T> exit) {
+		
+		if(getLeftChild() != null) {
+			getLeftChild().postOrder(exit);		
+		}
+		
+		if(getRightChild() != null) {
+			getRightChild().postOrder(exit);		
+		}
+		
+		exit.addLast(getData());
+		
+	}
+	
 	
 }

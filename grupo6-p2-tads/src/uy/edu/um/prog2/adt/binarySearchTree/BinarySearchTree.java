@@ -1,6 +1,6 @@
-package BinarySearchTree;
+package uy.edu.um.prog2.adt.binarySearchTree;
 
-import BinarySearchTree.FindException;
+import uy.edu.um.prog2.adt.binarySearchTree.FindException;
 import LinkedList.LinkedList;
 
 public class BinarySearchTree <K extends Comparable<K>,T> implements MyBinarySearchTree<K,T>{
@@ -47,6 +47,24 @@ public class BinarySearchTree <K extends Comparable<K>,T> implements MyBinarySea
 		LinkedList<T> exit = new LinkedList<>();
 		
 		root.inOrder(exit);
+		
+		return exit;
+	}
+	
+	public LinkedList<T> preOrder() {
+		
+		LinkedList<T> exit = new LinkedList<>();
+		
+		root.preOrder(exit);
+		
+		return exit;
+	}
+	
+	public LinkedList<T> postOrder() {
+		
+		LinkedList<T> exit = new LinkedList<>();
+		
+		root.postOrder(exit);
 		
 		return exit;
 	}
