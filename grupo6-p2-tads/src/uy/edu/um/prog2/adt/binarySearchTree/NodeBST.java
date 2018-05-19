@@ -1,7 +1,7 @@
 package uy.edu.um.prog2.adt.binarySearchTree;
 
 import uy.edu.um.prog2.adt.binarySearchTree.FindException;
-import LinkedList.LinkedList;
+import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
 
 public class NodeBST <K extends Comparable<K>, T>{
 
@@ -150,7 +150,7 @@ public class NodeBST <K extends Comparable<K>, T>{
 		return exit;
 	}
 	
-	public void inOrder(LinkedList<T> exit) {
+	public void inOrder(MiListaEntero<T> exit) {
 		
 		if(getLeftChild() != null) {
 			getLeftChild().inOrder(exit);		
@@ -164,7 +164,7 @@ public class NodeBST <K extends Comparable<K>, T>{
 		
 	}
 	
-	public void preOrder(LinkedList<T> exit) {
+	public void preOrder(MiListaEntero<T> exit) {
 		
 		exit.addLast(getData());
 		
@@ -178,7 +178,7 @@ public class NodeBST <K extends Comparable<K>, T>{
 		
 	}
 	
-	public void postOrder(LinkedList<T> exit) {
+	public void postOrder(MiListaEntero<T> exit) {
 		
 		if(getLeftChild() != null) {
 			getLeftChild().postOrder(exit);		

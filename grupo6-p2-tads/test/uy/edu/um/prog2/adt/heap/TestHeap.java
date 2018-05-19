@@ -4,10 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import uy.edu.um.prog2.adt.Heap;
-import uy.edu.um.prog2.adt.MyHeap;
-import uy.edu.um.prog2.adt.NodoHeap;
-
 public class TestHeap {
 	MyHeap<Integer,String> lista = new Heap<>(5,1);
 	

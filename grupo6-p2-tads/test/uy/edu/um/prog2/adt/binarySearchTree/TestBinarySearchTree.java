@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
-import LinkedList.LinkedList;
+import uy.edu.um.prog2.adt.linkedlist.MiLinkedList;
+import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
+import uy.edu.um.prog2.adt.linkedlist.PosicionInvalida;
 
 public class TestBinarySearchTree {
 
@@ -62,9 +64,9 @@ public class TestBinarySearchTree {
 		tree.insert(7, "E");
 		tree.insert(13, "H");
 		
-		LinkedList<String> searchTree = tree.inOrder();
+		MiListaEntero<String> searchTree = tree.inOrder();
 		
-		LinkedList<String> toCompare = new LinkedList<>();
+		MiListaEntero<String> toCompare = new MiLinkedList<>();
 		
 		toCompare.addLast("A");
 		toCompare.addLast("B");
@@ -77,7 +79,10 @@ public class TestBinarySearchTree {
 		toCompare.addLast("I");
 		
 		for(int i = 0; i < searchTree.size(); i++) {
-			assertEquals(toCompare.get(i), searchTree.get(i));
+			try {
+				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+			} catch (PosicionInvalida e) {
+			}
 		}
 			
 	}
@@ -94,9 +99,9 @@ public class TestBinarySearchTree {
 		tree.insert(7, "E");
 		tree.insert(13, "H");
 		
-		LinkedList<String> searchTree = tree.preOrder();
+		MiListaEntero<String> searchTree = tree.preOrder();
 		
-		LinkedList<String> toCompare = new LinkedList<>();
+		MiListaEntero<String> toCompare = new MiLinkedList<>();
 		
 		toCompare.addLast("F");
 		toCompare.addLast("B");
@@ -109,7 +114,10 @@ public class TestBinarySearchTree {
 		toCompare.addLast("H");
 		
 		for(int i = 0; i < searchTree.size(); i++) {
-			assertEquals(toCompare.get(i), searchTree.get(i));
+			try {
+				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+			} catch (PosicionInvalida e) {
+			}
 		}
 			
 	}
@@ -126,9 +134,9 @@ public class TestBinarySearchTree {
 		tree.insert(7, "E");
 		tree.insert(13, "H");
 		
-		LinkedList<String> searchTree = tree.postOrder();
+		MiListaEntero<String> searchTree = tree.postOrder();
 		
-		LinkedList<String> toCompare = new LinkedList<>();
+		MiListaEntero<String> toCompare = new MiLinkedList<>();
 		
 		toCompare.addLast("A");
 		toCompare.addLast("C");
@@ -141,7 +149,10 @@ public class TestBinarySearchTree {
 		toCompare.addLast("F");
 		
 		for(int i = 0; i < searchTree.size(); i++) {
-			assertEquals(toCompare.get(i), searchTree.get(i));
+			try {
+				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+			} catch (PosicionInvalida e) {
+			}
 		}
 			
 	}
