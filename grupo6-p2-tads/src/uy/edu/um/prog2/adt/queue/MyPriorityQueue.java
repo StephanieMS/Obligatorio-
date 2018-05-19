@@ -1,4 +1,4 @@
-package Queue;
+package uy.edu.um.prog2.adt.queue;
 
 public class MyPriorityQueue<P> implements PriorityQueue<P>{
 	
@@ -68,7 +68,7 @@ public class MyPriorityQueue<P> implements PriorityQueue<P>{
 		}
 	}
 
-	public void insert(P element, int priority) {
+	public void insertWithPriority(P element, int priority) {
 		Nodo<P> toAdd = new Nodo<>(element);
 		toAdd.setPriority(priority);
 		

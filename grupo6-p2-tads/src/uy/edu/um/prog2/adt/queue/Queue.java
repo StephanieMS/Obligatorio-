@@ -1,4 +1,4 @@
-package Queue;
+package uy.edu.um.prog2.adt.queue;
 
 public class Queue<E> implements MyQueue<E>{
 
