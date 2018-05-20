@@ -4,7 +4,7 @@ public interface MyHeap<K,V> {
 	
 	public void insert(K key, V value);
 	
-	public void delete();
+	public V findAndDelete();
 	
 	NodoHeap<K, V> getParent(int nPos);
 	

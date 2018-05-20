@@ -98,7 +98,8 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 		size++;
 	}
 
-	public void delete() {
+	public V findAndDelete() {
+		NodoHeap<K, V> datoEliminado = elements[0];
 		elements[0] = elements[size - 1];
 		elements[size - 1] = null;
 		size--;
@@ -142,15 +143,21 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 				}
 			}
 		}
+
+		return datoEliminado.getData();
 	}
-	
+
 	public int getSize() {
 		int size = 0;
-		
-		while(elements[size] != null && size < elements.length) {
+		NodoHeap<K, V> otemp = elements[0];
+
+		while (otemp != null) {
 			size++;
+			if (size < elements.length) {
+				otemp = elements[size];
+			}
 		}
-		
 		return size;
+
 	}
 }

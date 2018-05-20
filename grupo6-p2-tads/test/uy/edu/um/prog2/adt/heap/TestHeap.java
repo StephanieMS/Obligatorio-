@@ -34,11 +34,23 @@ public class TestHeap {
 		lista.insert(5,"E");
 		lista.insert(4,"D");
 		
-		lista.delete();
+		assertEquals("E",lista.findAndDelete());
 		
 		if(lista.getParent(1).getKey()!=4) {
 			fail("Error");
 		}
+	}
+	
+	@Test
+	public void testSize() {
+		lista.insert(1,"A");
+		lista.insert(2,"B");
+		lista.insert(3,"C");
+		lista.insert(5,"E");
+		lista.insert(4,"D");
+		
+		assertEquals(5, lista.getSize());
+		
 	}
 	
 
