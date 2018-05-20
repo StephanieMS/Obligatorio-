@@ -149,15 +149,13 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 
 	public int getSize() {
 		int size = 0;
-		NodoHeap<K, V> otemp = elements[0];
-
-		while (otemp != null) {
-			size++;
-			if (size < elements.length) {
-				otemp = elements[size];
+		
+		for(int i = 0; i < this.size; i++) {
+			if(elements[i] != null) {
+				size++;
 			}
 		}
 		return size;
-
 	}
+	
 }

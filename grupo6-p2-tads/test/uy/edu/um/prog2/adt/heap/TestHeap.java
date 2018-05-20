@@ -43,6 +43,7 @@ public class TestHeap {
 	
 	@Test
 	public void testSize() {
+		
 		lista.insert(1,"A");
 		lista.insert(2,"B");
 		lista.insert(3,"C");
