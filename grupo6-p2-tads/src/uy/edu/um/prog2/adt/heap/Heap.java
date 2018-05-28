@@ -4,7 +4,7 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 
 	private NodoHeap<K, V>[] elements;
 	private int size = 0;
-	private int tipoArbol;
+	private int tipoArbol; // (1 = HeapMax) (-1 = HeapMin)
 
 	public Heap(int size, int tipoArbol) {
 		elements = new NodoHeap[size];
@@ -68,31 +68,37 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 	}
 
 	public void insert(K key, V value) {
+
 		NodoHeap<K, V> nuevoNodo = new NodoHeap<>(key, value);
-		int nPosActual = 0;
-		nPosActual = size;
+		
+		int nPosActual = size;
+		
 		NodoHeap<K, V> parent = elements[getPosParent(nPosActual)];
+		
 		elements[size] = nuevoNodo; // agrego el Nodo al primer lugar vacio
 
 		// heap maximo
+		
 		if (tipoArbol == 1) {
-			while (getParent(nPosActual) != null && getParent(nPosActual).getKey().compareTo(nuevoNodo.getKey()) < 0) {
+			while (parent != null && parent.getKey().compareTo(nuevoNodo.getKey()) < 0) {
 
 				elements[getPosParent(nPosActual)] = nuevoNodo; // el nuevo nodo pasa a la posicion del padre
 				elements[nPosActual] = parent; // el padre baja una posicion
 				nPosActual = getPosParent(nPosActual);
-
+				parent = elements[getPosParent(nPosActual)];
 			}
 
 		}
+		
 		// heap minimo
+		
 		else {
-			while (getParent(nPosActual) != null && getParent(nPosActual).getKey().compareTo(nuevoNodo.getKey()) > 0) {
+			while (parent != null && parent.getKey().compareTo(nuevoNodo.getKey()) > 0) {
 
 				elements[getPosParent(nPosActual)] = nuevoNodo; // el nuevo nodo pasa a la posicion del padre
 				elements[nPosActual] = parent; // el padre baja una posicion
 				nPosActual = getPosParent(nPosActual);
-
+				parent = elements[getPosParent(nPosActual)];
 			}
 		}
 		size++;
@@ -109,36 +115,52 @@ public class Heap<K extends Comparable<K>, V> implements MyHeap<K, V> {
 		NodoHeap<K, V> parent = elements[posActual];
 
 		if (tipoArbol == 1) {
-			while (getLeftChild(posActual) != null
-					&& parent.getKey().compareTo((K) getLeftChild(posActual).getKey()) < 0
-					|| getRightChild(posActual) != null
-							&& parent.getKey().compareTo((K) getRightChild(posActual).getKey()) < 0) {
-				if (getRightChild(posActual).getKey().compareTo(getLeftChild(posActual).getKey()) < 0) {
+			while (getLeftChild(posActual) != null && parent.getKey().compareTo((K) getLeftChild(posActual).getKey()) < 0
+					|| getRightChild(posActual) != null && parent.getKey().compareTo((K) getRightChild(posActual).getKey()) < 0) {
+				
+				if (getRightChild(posActual) != null && getRightChild(posActual).getKey().compareTo(getLeftChild(posActual).getKey()) < 0) {
+					
 					elements[posActual] = getLeftChild(posActual);
 					elements[getPosLeftChild(posActual)] = parent;
-					posActual = getPosRightChild(posActual);
+					posActual = getPosLeftChild(posActual);
 					parent = elements[posActual];
-				} else {
+				
+				} else if(getRightChild(posActual) != null){
+					
 					elements[posActual] = getRightChild(posActual);
 					elements[getPosRightChild(posActual)] = parent;
 					posActual = getPosRightChild(posActual);
+					parent = elements[posActual];
+				
+				}else {
+					elements[posActual] = getLeftChild(posActual);
+					elements[getPosLeftChild(posActual)] = parent;
+					posActual = getPosLeftChild(posActual);
 					parent = elements[posActual];
 				}
 			}
 		} else {
-			while (getLeftChild(posActual) != null
-					&& parent.getKey().compareTo((K) getLeftChild(posActual).getKey()) > 0
-					|| getRightChild(posActual) != null
-							&& parent.getKey().compareTo((K) getRightChild(posActual).getKey()) > 0) {
-				if (getRightChild(posActual).getKey().compareTo(getLeftChild(posActual).getKey()) > 0) {
+			while (getLeftChild(posActual) != null && parent.getKey().compareTo((K) getLeftChild(posActual).getKey()) > 0
+					|| getRightChild(posActual) != null && parent.getKey().compareTo((K) getRightChild(posActual).getKey()) > 0) {
+				
+				if (getRightChild(posActual) != null && getRightChild(posActual).getKey().compareTo(getLeftChild(posActual).getKey()) > 0) {
+					
 					elements[posActual] = getLeftChild(posActual);
 					elements[getPosLeftChild(posActual)] = parent;
-					posActual = getPosRightChild(posActual);
+					posActual = getPosLeftChild(posActual);
 					parent = elements[posActual];
-				} else {
+				
+				}else if(getRightChild(posActual) != null) {
+					
 					elements[posActual] = getRightChild(posActual);
 					elements[getPosRightChild(posActual)] = parent;
 					posActual = getPosRightChild(posActual);
+					parent = elements[posActual];
+				
+				}else {
+					elements[posActual] = getLeftChild(posActual);
+					elements[getPosLeftChild(posActual)] = parent;
+					posActual = getPosLeftChild(posActual);
 					parent = elements[posActual];
 				}
 			}
