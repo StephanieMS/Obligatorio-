@@ -1,5 +1,10 @@
 package obligatorio;
 
 public class Rubro {
-	private int nombre;
+	private String nombre;
+
+	public Rubro(String nombre) {
+		this.nombre = nombre;
+	}
+
 }
