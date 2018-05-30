@@ -1,25 +1,30 @@
 package obligatorio;
 
-import java.io.FileReader;
-import java.io.IOException;
-
-import com.opencsv.CSVReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
-
-	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws IOException {
+	
+	public static void main(String[] args) {
 		
-		String file = "v_producto_real_updated.csv";
+		String fileName = "v_producto_real_updated.csv";
 		
-		CSVReader csv = new CSVReader(new FileReader(file), ';');
+		File file = new File(fileName);
 		
-		String[] fila = null;
-		
-		fila = csv.readNext(); 
-		
-		csv.close();
-		
+		try {
+			Scanner inputStream = new Scanner(file);
+			
+			while(inputStream.hasNext()) {
+				String data = inputStream.next();
+				System.out.println(data);
+			}
+			inputStream.close();
+			
+		}catch(FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+				
 	
 	}
 	
