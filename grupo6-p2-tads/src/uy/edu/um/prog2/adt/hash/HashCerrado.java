@@ -1,9 +1,10 @@
 package uy.edu.um.prog2.adt.hash;
 
 public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> {
+	
 	private HashNode<K, V>[] vector;
 	private int size;
-	int cantElementos = 0;
+	int cantElementos = 0;			// para qué es necesario? si puedo hacer un vector.size();
 
 	public HashCerrado(int sizeInicial) {
 		this.size = sizeInicial;
@@ -16,51 +17,84 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		}
 		
 		int pos = clave.hashCode() % size;
+		
 		HashNode<K, V> nodo = new HashNode<>(clave, valor);
 
 		if (vector[pos] == null || vector[pos].getEstaBorrado() == true) {
 			vector[pos] = nodo;
 			cantElementos++;
 		} else {
-			int posAux = pos;
-			while (vector[posAux] != null && vector[posAux].getEstaBorrado() == true) {
-					posAux++;
-
-				if (posAux >= size) {
-					posAux = 0;
-				}
+			
+			for(int i = pos+1; i < size; i++) {
+			
+				if(vector[i] != null) {
+					
+					if(vector[i].getEstaBorrado() == true) {
+						vector[i] = nodo;
+						cantElementos++;
+						i = size;
+					}else if(i == size-1) {
+						i=0;
+					}
+				}else {
+					vector[i] = nodo;
+					cantElementos++;
+					i = size;
+				}	
 			}
-			vector[posAux] = nodo;
-
 		}
-		cantElementos++;
+		
 	}
 
 	public boolean pertenece(K clave) {
+		
 		boolean pertenece = false;
 
 		int posEsperada = clave.hashCode() % size;
-		if (vector[posEsperada] != null) {
-			if (vector[posEsperada].getClave().equals(clave) == true && vector[posEsperada].getEstaBorrado() == false) {
-				pertenece = true;
-			} else {
-				posEsperada++;
-				while (posEsperada < vector.length
-						&& (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == false)) {
-					posEsperada++;
-				}
+		
+		if (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == true && 
+				vector[posEsperada].getEstaBorrado() == false) {
+			
+			pertenece = true;
+		
+		} else {
+			
+			for(int i = posEsperada+1; i < size; i++) {
+				
+				if(vector[i] != null) {
+					
+					if(vector[i].getClave().equals(clave) == true && vector[i].getEstaBorrado() == false) {
+						pertenece = true;
+						i = size;
+					}
+				}else {
+					i = size;
+				}	
 			}
 		}
 		return pertenece;
 	}
 
 	public void borrar(K clave) throws ClaveInvalida {
-		for (int i = 0; i < size; i++) {
-			if (vector[i].getClave() == clave) {
-				vector[i].setEstaBorrado(true);
-				cantElementos--;
-			} else {
-				throw new ClaveInvalida();
+
+		int posEsperada = clave.hashCode() % size;
+		
+		if (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == true) {
+			vector[posEsperada].setEstaBorrado(true); 
+			
+		} else {
+			
+			for(int i = posEsperada+1; i < size; i++) {
+				
+				if(vector[i] != null) {
+					
+					if(vector[i].getClave().equals(clave) == true) {
+						vector[i].setEstaBorrado(true);
+						i = size;
+					}
+				}else {
+					throw new ClaveInvalida();
+				}	
 			}
 		}
 	}

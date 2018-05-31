@@ -22,6 +22,7 @@ public class TestHashCerrado {
 		}
 
 		assertTrue(hC.pertenece(1));
+		assertTrue(hC.pertenece(3));
 
 		try {
 			hC.borrar(3);
