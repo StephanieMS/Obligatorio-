@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.7.jar"/>
 	<classpathentry kind="lib" path="lib/opencsv-4.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/grupo6-p2-tads"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

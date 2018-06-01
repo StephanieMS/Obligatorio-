@@ -4,7 +4,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 	
 	private HashNode<K, V>[] vector;
 	private int size;
-	int cantElementos = 0;			// para qué es necesario? si puedo hacer un vector.size();
+	int cantElementos = 0;
 
 	public HashCerrado(int sizeInicial) {
 		this.size = sizeInicial;
@@ -12,6 +12,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 	}
 
 	public void insertar(K clave, V valor) throws ElementoYaExistenteException {
+		
 		if (cantElementos == size) {
 			agrandarHash();
 		}
@@ -21,8 +22,13 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		HashNode<K, V> nodo = new HashNode<>(clave, valor);
 
 		if (vector[pos] == null || vector[pos].getEstaBorrado() == true) {
+			
 			vector[pos] = nodo;
 			cantElementos++;
+		
+		}else if(vector[pos] != null && vector[pos].getClave().equals(clave) == true) {
+			throw new ElementoYaExistenteException();
+			
 		} else {
 			
 			for(int i = pos+1; i < size; i++) {
@@ -64,6 +70,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 				if(vector[i] != null) {
 					
 					if(vector[i].getClave().equals(clave) == true && vector[i].getEstaBorrado() == false) {
+						
 						pertenece = true;
 						i = size;
 					}
@@ -80,6 +87,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		int posEsperada = clave.hashCode() % size;
 		
 		if (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == true) {
+			
 			vector[posEsperada].setEstaBorrado(true); 
 			
 		} else {
@@ -89,6 +97,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 				if(vector[i] != null) {
 					
 					if(vector[i].getClave().equals(clave) == true) {
+						
 						vector[i].setEstaBorrado(true);
 						i = size;
 					}
@@ -100,35 +109,36 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 	}
 
 	private void agrandarHash() {
+		
 		int nuevoSize = 2 * size;
 
-		HashNode<K, V>[] vectorNuevo;
-		vectorNuevo = new HashNode[nuevoSize];
+		HashNode<K, V>[] vectorNuevo = new HashNode[nuevoSize];
 
 		for (int i = 0; i < size; i++) {
+			
 			K claveAux = vector[i].getClave();
 
 			int pos = claveAux.hashCode() % nuevoSize;
 
 			if (vectorNuevo[pos] == null) {
+				
 				vectorNuevo[pos] = vector[i];
+			
 			} else {
-				int posAux = pos;
-				while (vectorNuevo[posAux] != null) {
-					if (posAux >= nuevoSize) {
-						posAux = 0;
+				
+				while (vectorNuevo[pos] != null) {
+					
+					if (pos == nuevoSize) {
+						pos = 0;
 					} else {
-						posAux++;
+						pos++;
 					}
 				}
-				vectorNuevo[posAux] = vector[i];
+				vectorNuevo[pos] = vector[i];
 			}
-
 		}
-
 		size = nuevoSize;
 		vector = vectorNuevo;
-
 	}
 
 }

@@ -8,9 +8,10 @@ import org.junit.Test;
 
 public class TestHashCerrado {
 
+	HashTable<Integer, String> hC = new HashCerrado<>(4);
+	
 	@Test
 	public void test() {
-		HashTable<Integer, String> hC = new HashCerrado<>(4);
 
 		try {
 			hC.insertar(1, "A");
@@ -20,8 +21,7 @@ public class TestHashCerrado {
 		} catch (ElementoYaExistenteException e) {
 			fail("ElementoYaExistenteException");
 		}
-
-		assertTrue(hC.pertenece(1));
+		
 		assertTrue(hC.pertenece(3));
 
 		try {
@@ -29,6 +29,7 @@ public class TestHashCerrado {
 		} catch (ClaveInvalida e1) {
 			fail("ClaveInvalida");
 		}
+		
 		assertFalse(hC.pertenece(3));
 
 		try {
@@ -37,4 +38,25 @@ public class TestHashCerrado {
 			fail("ElementoYaExistenteException");
 		}
 	}
+	
+	@Test
+	public void testAgrandarHash() {
+	
+		try {
+			hC.insertar(1, "A");
+			hC.insertar(2, "B");
+			hC.insertar(3, "C");
+			hC.insertar(4, "D");
+			hC.insertar(5, "E");
+			hC.insertar(6, "F");
+			hC.insertar(7, "G");
+		} catch (ElementoYaExistenteException e) {
+			fail("ElementoYaExistenteException");
+		}
+		
+		assertTrue(hC.pertenece(6));
+		
+	}
+	
+	
 }
