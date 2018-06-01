@@ -8,4 +8,6 @@ public interface HashTable<K extends Comparable<K>, V> {
 
 	public void borrar(K clave) throws ClaveInvalida;
 	
+	public V get(K clave);
+	
 }

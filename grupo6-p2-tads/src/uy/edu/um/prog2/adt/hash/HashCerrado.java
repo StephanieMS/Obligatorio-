@@ -107,7 +107,32 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 			}
 		}
 	}
+	
+	public V get(K clave) {
 
+		HashNode<K, V> nodo = null;
+
+		int posEsperada = clave.hashCode() % size;
+
+		if (vector[posEsperada].getClave().equals(clave) == true && vector[posEsperada].getEstaBorrado() == false) {
+			nodo = vector[posEsperada];
+		} else {
+				posEsperada++;
+				while (posEsperada < vector.length
+						&& (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == false)) {
+					posEsperada++;
+				
+			} 
+				}
+			
+			if (vector[posEsperada].getClave().equals(clave) == true && vector[posEsperada].getEstaBorrado() == false) {
+				nodo = vector[posEsperada];
+			}
+
+		return nodo.getValor();
+
+	}
+	
 	private void agrandarHash() {
 		
 		int nuevoSize = 2 * size;
