@@ -21,5 +21,8 @@ public class Marca {
 		this.nombre = nombre;
 	}
 	
+	public void setProducto(Producto prod) {
+		productos.add(prod);
+	}
 	
 }

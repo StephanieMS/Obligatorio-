@@ -14,6 +14,8 @@ import uy.edu.um.prog2.adt.hash.HashTable;
 
 public class Main {
 	
+	private static HashTable<String, Marca> marcas;
+	
 	public static void main(String[] args) throws IOException {
 		
 		String fileName = "v_producto_real_updated.csv";
@@ -22,9 +24,16 @@ public class Main {
 
 		List<String[]> datos = csvReader.readAll();
 		
-		HashTable<Integer, Producto<Integer>> productos = new HashCerrado<>(datos.size());
+		csvReader.close();
 		
-		List<Marca> marcas = new ArrayList<>();
+		marcas = new HashCerrado<>(datos.size() / 2);
+		
+		cargarDatos(datos);
+		
+		
+	}
+	
+	public static void cargarDatos(List<String[]> datos) {
 		
 		for(int i = 1 ; i < datos.size() ; i++) {
 			
@@ -33,38 +42,31 @@ public class Main {
 			
 			Marca marcaProd = null;
 			
-			for(int j = 0; j < marcas.size(); j++) {
-				if(marcas.get(j).getNombre().equals(datos.get(i)[12])){
-					marcaProd = marcas.get(j);
-					j = marcas.size();
-				}
-			}
+			boolean existe = false;
 			
-			if(marcaProd == null) {
+			if(marcas.pertenece(datos.get(i)[12]) == true) {
+				marcaProd = marcas.get(datos.get(i)[12]);
+				existe = true;
+			}else {
 				marcaProd = new Marca(datos.get(i)[12]);
 			}
-			
 			
 			Producto<Integer> prod = new Producto<>((datos.get(i))[0], (datos.get(i))[1], idProd, (datos.get(i))[20], 
 				marcaProd, (datos.get(i))[5], (datos.get(i))[23], (datos.get(i))[3], (datos.get(i))[10], (datos.get(i))[13]);
 			
-			try {
-				productos.insertar(idProd, prod);
-			} catch (ElementoYaExistenteException e) {}
-			
-			
+			if(existe == true) {
+				marcas.get(datos.get(i)[12]).setProducto(prod);
+				System.out.println("CARGADO");
+			}else {
+				try {
+				marcas.insertar(datos.get(i)[12], marcaProd);
+				}catch(ElementoYaExistenteException e1) {}
+				
+				marcas.get(datos.get(i)[12]).setProducto(prod);
+				System.out.println("CARGADO");
+			}
 		
 		}
-		csvReader.close();
-		
-		
-		
-		
-		
-		
-	}
-	
-	public void cargarDatos() {
 		
 	}
 				
