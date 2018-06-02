@@ -6,26 +6,24 @@ public class Producto<K extends Comparable<K>> {
 	private String nombreFantasia;
 	private String estado;
 	private K idProd;
-	private String pMarca;
-	private String pEmpresa;
-	private String rucEmpresa;
-	private String pRubro;
-	private String pClase;
-	private String pPais;
+	private Marca pMarca;
+	private Empresa pEmpresa;
+	private Rubro pRubro;
+	private Clase pClase;
+	private Pais pPais;
 
-	public Producto(String nombre, String nombreFantasia, K idProd, String estado, String nombreMarca,
+	public Producto(String nombre, String nombreFantasia, K idProd, String estado, Marca marca,
 			String nombreEmpresa, String rucEmpresa, String nombreRubro, String nombreClase, String nombrePais) {
 
 		this.nombre = nombre;
 		this.nombreFantasia = nombreFantasia;
 		this.idProd = idProd;
 		this.estado = estado;
-		this.pMarca = nombreMarca;
-		this.pEmpresa = nombreEmpresa;
-		this.rucEmpresa = rucEmpresa;
-		this.pRubro = nombreRubro;
-		this.pClase = nombreClase;
-		this.pPais = nombrePais;
+		pMarca = marca;
+		pEmpresa = new Empresa (nombreEmpresa, rucEmpresa);
+		pRubro = new Rubro (nombreRubro);
+		pClase = new Clase (nombreClase);
+		pPais = new Pais (nombrePais);
 
 	}
 
@@ -61,52 +59,6 @@ public class Producto<K extends Comparable<K>> {
 		this.idProd = idProd;
 	}
 
-	public String getpMarca() {
-		return pMarca;
-	}
 
-	public void setpMarca(String pMarca) {
-		this.pMarca = pMarca;
-	}
-
-	public String getpEmpresa() {
-		return pEmpresa;
-	}
-
-	public void setpEmpresa(String pEmpresa) {
-		this.pEmpresa = pEmpresa;
-	}
-
-	public String getRucEmpresa() {
-		return rucEmpresa;
-	}
-
-	public void setRucEmpresa(String rucEmpresa) {
-		this.rucEmpresa = rucEmpresa;
-	}
-
-	public String getpRubro() {
-		return pRubro;
-	}
-
-	public void setpRubro(String pRubro) {
-		this.pRubro = pRubro;
-	}
-
-	public String getpClase() {
-		return pClase;
-	}
-
-	public void setpClase(String pClase) {
-		this.pClase = pClase;
-	}
-
-	public String getpPais() {
-		return pPais;
-	}
-
-	public void setpPais(String pPais) {
-		this.pPais = pPais;
-	}
 
 }

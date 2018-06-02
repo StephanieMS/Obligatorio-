@@ -1,11 +1,16 @@
 package obligatorio;
 
+import java.util.ArrayList;
+
 public class Marca {
 	
 	private String nombre;
+	
+	private ArrayList<Producto> productos;
 
-	public Marca(String nombre) {
-		this.nombre = nombre;
+	public Marca(String nombMarca) {
+		productos = new ArrayList<>();
+		this.nombre = nombMarca;
 	}
 
 	public String getNombre() {
