@@ -19,6 +19,10 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		
 		int pos = clave.hashCode() % size;
 		
+		if(pos < 0) {
+			pos = pos*(-1);
+		}
+		
 		HashNode<K, V> nodo = new HashNode<>(clave, valor);
 
 		if (vector[pos] == null || vector[pos].getEstaBorrado() == true) {
@@ -58,6 +62,10 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 
 		int posEsperada = clave.hashCode() % size;
 		
+		if(posEsperada < 0) {
+			posEsperada = posEsperada*(-1);
+		}
+		
 		if (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == true && 
 				vector[posEsperada].getEstaBorrado() == false) {
 			
@@ -86,6 +94,10 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 
 		int posEsperada = clave.hashCode() % size;
 		
+		if(posEsperada < 0) {
+			posEsperada = posEsperada*(-1);
+		}
+		
 		if (vector[posEsperada] != null && vector[posEsperada].getClave().equals(clave) == true) {
 			
 			vector[posEsperada].setEstaBorrado(true); 
@@ -113,6 +125,10 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		HashNode<K, V> nodo = null;
 
 		int posEsperada = clave.hashCode() % size;
+		
+		if(posEsperada < 0) {
+			posEsperada = posEsperada*(-1);
+		}
 
 		if (vector[posEsperada].getClave().equals(clave) == true && vector[posEsperada].getEstaBorrado() == false) {
 			nodo = vector[posEsperada];
@@ -144,6 +160,10 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 			K claveAux = vector[i].getClave();
 
 			int pos = claveAux.hashCode() % nuevoSize;
+			
+			if(pos < 0) {
+				pos = pos*(-1);
+			}
 
 			if (vectorNuevo[pos] == null) {
 				
@@ -165,5 +185,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		size = nuevoSize;
 		vector = vectorNuevo;
 	}
+	
+	
 
 }

@@ -110,14 +110,18 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 	}
 
 	public void addLast(V Value) {
-		Nodo<V> oItem = new Nodo<>(Value);
-
-		Nodo<V> ultimo = primero;
-
-		while (ultimo.getSiguiente() != null) {
-			ultimo = ultimo.getSiguiente();
+	
+		if(primero == null) {
+			primero = new Nodo<>(Value);
+		}else {
+			Nodo<V> oItem = new Nodo<>(Value);
+			Nodo<V> temp = primero;
+			while (temp.getSiguiente() != null) {
+				temp = temp.getSiguiente();
+			}
+			temp.setSiguiente(oItem);
 		}
-		ultimo.setSiguiente(oItem);
+
 	}
 
 }

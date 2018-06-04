@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Marca {
 	
 	private String nombre;
+	private int cantProductosHabilitados;
 	
 	private ArrayList<Producto> productos;
 
@@ -23,6 +24,17 @@ public class Marca {
 	
 	public void setProducto(Producto prod) {
 		productos.add(prod);
+	}
+
+	public ArrayList<Producto> getProductos() {
+		return productos;
+	}
+	public int getCantProductosHabilitados() {
+		return cantProductosHabilitados;
+	}
+
+	public void setCantProductosHabilitados() {
+		cantProductosHabilitados++;
 	}
 	
 }

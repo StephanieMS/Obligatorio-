@@ -31,8 +31,8 @@ public class Empresa {
 		return cantProductosHabilitados;
 	}
 
-	public void setCantProductosHabilitados(int cantProductosHabilitados) {
-		this.cantProductosHabilitados = cantProductosHabilitados;
+	public void setCantProductosHabilitados() {
+		cantProductosHabilitados++;
 	}
 	
 	
