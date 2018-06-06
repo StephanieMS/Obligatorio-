@@ -3,9 +3,10 @@ package uy.edu.um.prog2.adt.linkedlist;
 public class MiLinkedList<V> implements MiListaEntero<V> {
 
 	private Nodo<V> primero;
+	private int contador = 0;
 
 	public void agregar(V nValue) {
-
+		
 		Nodo<V> oItem = new Nodo<>(nValue);
 
 		if (primero == null) {
@@ -20,7 +21,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 			}
 			ultimo.setSiguiente(oItem);
 		}
-
+		contador++;
 	}
 
 	public int size() {
@@ -122,6 +123,10 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 			temp.setSiguiente(oItem);
 		}
 
+	}
+	
+	public int getContador() {
+		return contador;
 	}
 
 }

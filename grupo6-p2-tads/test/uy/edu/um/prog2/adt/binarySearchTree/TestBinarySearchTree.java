@@ -11,12 +11,13 @@ import uy.edu.um.prog2.adt.linkedlist.PosicionInvalida;
 
 public class TestBinarySearchTree {
 
-	BinarySearchTree<Integer, String> tree = new BinarySearchTree<>(8, "F");
+	BinarySearchTree<Integer, String> tree = new BinarySearchTree<>();
 
 	
 	@Test
 	public void testFind() {
-				
+		
+		tree.insert(8, "F");
 		tree.insert(3, "B");
 		tree.insert(1, "A");
 		tree.insert(6, "D");
@@ -37,6 +38,7 @@ public class TestBinarySearchTree {
 	@Test
 	public void testDelete() {
 		
+		tree.insert(8, "F");
 		tree.insert(3, "B");
 		tree.insert(1, "A");
 		tree.insert(6, "D");
@@ -55,6 +57,7 @@ public class TestBinarySearchTree {
 	@Test
 	public void testInOrder() {
 		
+		tree.insert(8, "F");
 		tree.insert(3, "B");
 		tree.insert(1, "A");
 		tree.insert(6, "D");
@@ -90,6 +93,7 @@ public class TestBinarySearchTree {
 	@Test
 	public void testPreOrder() {
 		
+		tree.insert(8, "F");
 		tree.insert(3, "B");
 		tree.insert(1, "A");
 		tree.insert(6, "D");
@@ -125,6 +129,7 @@ public class TestBinarySearchTree {
 	@Test
 	public void testPostOrder() {
 		
+		tree.insert(8, "F");
 		tree.insert(3, "B");
 		tree.insert(1, "A");
 		tree.insert(6, "D");

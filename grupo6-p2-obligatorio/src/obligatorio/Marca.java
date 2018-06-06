@@ -1,40 +1,28 @@
 package obligatorio;
 
-import java.util.ArrayList;
+import uy.edu.um.prog2.adt.linkedlist.MiLinkedList;
+import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
 
 public class Marca {
 	
 	private String nombre;
-	private int cantProductosHabilitados;
-	
-	private ArrayList<Producto> productos;
+	private MiListaEntero<Producto> productos;
 
 	public Marca(String nombMarca) {
-		productos = new ArrayList<>();
 		this.nombre = nombMarca;
+		productos = new MiLinkedList<>();
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	
 	public void setProducto(Producto prod) {
-		productos.add(prod);
+		productos.agregar(prod);
 	}
 
-	public ArrayList<Producto> getProductos() {
+	public MiListaEntero<Producto> getProductos() {		
 		return productos;
-	}
-	public int getCantProductosHabilitados() {
-		return cantProductosHabilitados;
-	}
-
-	public void setCantProductosHabilitados() {
-		cantProductosHabilitados++;
 	}
 	
 }

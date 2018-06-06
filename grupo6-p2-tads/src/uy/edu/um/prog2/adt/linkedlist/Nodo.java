@@ -6,10 +6,8 @@ public class Nodo<V> {
 	private Nodo<V> siguiente;
 
 	public Nodo(V nValor) {
-
 		valor = nValor;
 		siguiente = null;
-
 	}
 
 	public void setSiguiente(Nodo<V> oTemp) {

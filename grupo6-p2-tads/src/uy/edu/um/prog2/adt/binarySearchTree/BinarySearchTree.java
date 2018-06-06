@@ -8,27 +8,28 @@ public class BinarySearchTree <K extends Comparable<K>,T> implements MyBinarySea
 
 	private NodeBST<K, T> root;
 	
-	public BinarySearchTree(K key, T data) {
-		root = new NodeBST<>(key, data);
-	}
-	
 	public T find(K key) {
 		T exit = null;
 		
 		try {
 			exit = root.find(key);
 		}catch(FindException e1) {
-			System.out.println(e1.getMessage());
+//			System.out.println(e1.getMessage());
 		}
 		
 		return exit;
 	}
 	
 	public void insert(K key, T data) {
-		try {
-			root.insert(key, data);
-		}catch(SameKeyException e1) {
-			System.out.println(e1.getMessage());
+		
+		if(root == null) {
+			root = new NodeBST<>(key, data);
+		}else {
+			try {
+				root.insert(key, data);
+			}catch(SameKeyException e1) {
+	//			System.out.println(e1.getMessage());
+			}
 		}
 	}
 

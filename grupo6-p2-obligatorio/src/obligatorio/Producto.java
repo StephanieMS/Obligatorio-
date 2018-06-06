@@ -1,10 +1,10 @@
 package obligatorio;
 
-public class Producto<K extends Comparable<K>> {
+public class Producto	{
 
 	private String nombre;
 	private String nombreFantasia;
-	private boolean estado;
+	private String estado;
 	private String idProd;
 	private Marca pMarca;
 	private Empresa pEmpresa;
@@ -13,44 +13,19 @@ public class Producto<K extends Comparable<K>> {
 	private Pais pPais;
 
 	public Producto(String nombre, String nombreFantasia, String idProd, String estado, Marca marca,
-			String nombreEmpresa, String rucEmpresa, String nombreRubro, String nombreClase, String nombrePais) {
+			Empresa empresa, Rubro rubro, Clase clase, Pais pais) {
 
 		this.nombre = nombre;
 		this.nombreFantasia = nombreFantasia;
 		this.idProd = idProd;
+		this.estado = estado;
 		pMarca = marca;
-		if(estado.equals("HABILITADO")) {
-			pMarca.setCantProductosHabilitados();
-		}
-		pEmpresa = new Empresa (nombreEmpresa, rucEmpresa);
-		if(estado.equals("HABILITADO")) {
-			pEmpresa.setCantProductosHabilitados();
-			this.estado = true;
-		}else {
-			this.estado = false;
-		}
-		pRubro = new Rubro (nombreRubro);
-		pClase = new Clase (nombreClase);
-		pPais = new Pais (nombrePais);
+		pEmpresa = empresa;
+		pRubro = rubro;
+		pClase = clase;
+		pPais = pais;
 
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public String getNombreFantasia() {
-		return nombreFantasia;
-	}
-
-	public boolean getEstado() {
-		return estado;
-	}
-
-	public Empresa getpEmpresa() {
-		return pEmpresa;
-	}
-
-
+	
 
 }
