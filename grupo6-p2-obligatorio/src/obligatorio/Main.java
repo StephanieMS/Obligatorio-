@@ -126,55 +126,36 @@ public class Main {
 
 	}
 
-	// public static void obtenerEmpresas() throws PosicionInvalida {
-	//
-	// Empresa empresasConMayorProdHab[] = new Empresa[20];
-	//
-	//
-	//
-	// MiListaEntero<Empresa> empresas = new MiLinkedList<>();
-	//
-	// ArrayList<Integer> cantElementosPorEmpresa = new ArrayList<>();
-	//
-	// for(int i = 0 ; i < marcas.preOrder().size(); i++) {
-	//
-	// if(marcas.preOrder() != null && marcas.preOrder().getElemento(i) != null) {
-	//
-	// for(int j = 0 ; j < marcas.preOrder().getElemento(i).getProductos().size();
-	// j++) {
-	//
-	// if(marcas.preOrder().getElemento(i).getProductos().get(j).getEstado() ==
-	// true) {
-	// empresas.addLast(marcas.preOrder().getElemento(i).getProductos().get(j).getpEmpresa());
-	// }
-	// }
-	// }
-	//
-	// }
-	//
-	// for(int i = 0 ; i < empresas.size() ; i++) {
-	//
-	// cantElementosPorEmpresa.add(empresas.getElemento(i).getCantProductosHabilitados());
-	//
-	// }
-	// HeapSort<Integer> heapToOrder = new HeapSort();
-	//
-	// heapToOrder.order(cantElementosPorEmpresa);
-	//
-	// for(int n = 0 ; n < 20; n++) {
-	//
-	// for(int j = 0; j < empresas.size(); j++) {
-	//
-	// if(empresas.getElemento(j).getCantProductosHabilitados() ==
-	// cantElementosPorEmpresa.get(n)) {
-	// empresasConMayorProdHab[n] = empresas.getElemento(j);
-	// }
-	// }
-	// }
-	//
-	// for(int i = 0 ; i < 20; i++) {
-	// System.out.println(empresasConMayorProdHab[i].getNombre());
-	// }
-	// }
+	public static void obtenerEmpresas() {
+		Empresa empresasConMayorProdHab[] = new Empresa[20];
+		MiListaEntero<Integer> cantElementosPorEmpresa = new MiLinkedList<>();
+
+		// la key en empresas.getElemento tiene que ser una empresa pero no se como
+		// poner cual empresa tiene que ser en esa posicion
+		for (int i = 0; i < nombresEmpresas.size(); i++) {
+			cantElementosPorEmpresa
+					.add(empresas.getElemento(nombresEmpresas.getElemento(i), Empresa).getCantProductosHabilitados());
+		}
+		
+		//hay que agregar heapSort a la carpeta de los tads
+		HeapSort<Integer> heapToOrder = new HeapSort();
+
+		heapToOrder.order(cantElementosPorEmpresa);
+
+		for (int n = 0; n < 20; n++) {
+			for (int j = 0; j < 20; j++) {
+				if (empresas.getElemento(nombresEmpresas.getElemento(n), Empresa)
+						.getCantProductosHabilitados() == cantElementosPorEmpresa.getElemento(j)) {
+					empresasConMayorProdHab[n] = empresas.getElemento(nombresEmpresas.getElemento(j), Empresa);
+				}
+			}
+
+		}
+
+		for (int i = 0; i < 20; i++) {
+			System.out.println(empresasConMayorProdHab[i].getNombre());
+		}
+
+	}
 
 }
