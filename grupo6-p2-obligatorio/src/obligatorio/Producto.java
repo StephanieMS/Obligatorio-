@@ -1,6 +1,6 @@
 package obligatorio;
 
-public class Producto	{
+public class Producto {
 
 	private String nombre;
 	private String nombreFantasia;
@@ -12,8 +12,8 @@ public class Producto	{
 	private Clase pClase;
 	private Pais pPais;
 
-	public Producto(String nombre, String nombreFantasia, String idProd, String estado, Marca marca,
-			Empresa empresa, Rubro rubro, Clase clase, Pais pais) {
+	public Producto(String nombre, String nombreFantasia, String idProd, String estado, Marca marca, Empresa empresa,
+			Rubro rubro, Clase clase, Pais pais) {
 
 		this.nombre = nombre;
 		this.nombreFantasia = nombreFantasia;
@@ -26,6 +26,5 @@ public class Producto	{
 		pPais = pais;
 
 	}
-	
 
 }

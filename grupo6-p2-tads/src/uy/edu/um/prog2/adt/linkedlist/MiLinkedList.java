@@ -6,7 +6,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 	private int contador = 0;
 
 	public void agregar(V nValue) {
-		
+
 		Nodo<V> oItem = new Nodo<>(nValue);
 
 		if (primero == null) {
@@ -55,28 +55,28 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 	}
 
 	public void eliminarElemento(V value) {
-		if(primero == null) {
+		if (primero == null) {
 			System.out.println("--NO HAY ELEMENTOS CARGADOS EN LA LISTA--");
 		}
-		
-		if(primero != null) {
-			if(primero.getValor() == value) {
+
+		if (primero != null) {
+			if (primero.getValor() == value) {
 				Nodo<V> toDelete = primero;
 				primero = primero.getSiguiente();
 				toDelete.setSiguiente(null);
 				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
 			}
 		}
-		
+
 		Nodo<V> temp = primero;
-		
-		while(temp.getSiguiente() != null) {
-			if((temp.getSiguiente()).getValor() == value) {
+
+		while (temp.getSiguiente() != null) {
+			if ((temp.getSiguiente()).getValor() == value) {
 				Nodo<V> toDelete = temp.getSiguiente();
 				temp.setSiguiente(toDelete.getSiguiente());
 				toDelete.setSiguiente(null);
 				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
-			}else {
+			} else {
 				temp = temp.getSiguiente();
 			}
 		}
@@ -111,10 +111,10 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 	}
 
 	public void addLast(V Value) {
-	
-		if(primero == null) {
+
+		if (primero == null) {
 			primero = new Nodo<>(Value);
-		}else {
+		} else {
 			Nodo<V> oItem = new Nodo<>(Value);
 			Nodo<V> temp = primero;
 			while (temp.getSiguiente() != null) {
@@ -124,7 +124,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 		}
 
 	}
-	
+
 	public int getContador() {
 		return contador;
 	}

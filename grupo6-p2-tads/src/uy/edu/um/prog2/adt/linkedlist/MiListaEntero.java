@@ -16,4 +16,6 @@ public interface MiListaEntero<V> {
 
 	public void addLast(V Value);
 
+	public int getContador();
+
 }
