@@ -31,5 +31,9 @@ public class Empresa {
 	public void setCantProdHabilitados() {
 		cantProdHabilitados++;
 	}
+	
+	public int getCantProdHabilitados() {
+		return cantProdHabilitados;
+	}
 
 }

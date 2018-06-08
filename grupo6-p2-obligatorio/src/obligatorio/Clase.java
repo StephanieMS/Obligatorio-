@@ -13,5 +13,13 @@ public class Clase {
 		return nombre;
 	}
 	
+	public void setCantProdHabilitados() {
+		cantProdHabilitados++;
+	}
+	
+	public int getCantProdHabilitados() {
+		return cantProdHabilitados;
+	}
+	
 	
 }

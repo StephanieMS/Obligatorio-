@@ -13,6 +13,7 @@ import uy.edu.um.prog2.adt.binarySearchTree.MyBinarySearchTree;
 import uy.edu.um.prog2.adt.hash.ElementoYaExistenteException;
 import uy.edu.um.prog2.adt.hash.HashCerrado;
 import uy.edu.um.prog2.adt.hash.HashTable;
+import uy.edu.um.prog2.adt.heap.Heap;
 import uy.edu.um.prog2.adt.heap.MyHeap;
 import uy.edu.um.prog2.adt.linkedlist.MiLinkedList;
 import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
@@ -123,44 +124,30 @@ public class Main {
 			
 			if(prod.getEstaHabilitado() == true) {
 				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
+				marcas.get(datos.get(i)[12]).setCantProdHabilitados();
+				
 			}
 		}
 
 	}
 
-	public static void obtenerEmpresas() {
+	public static void obtenerEmpresas() throws PosicionInvalida {
 		
 		Empresa empresasConMayorProdHab[] = new Empresa[20];
 				
-		MiListaEntero<Integer> cantElementosPorEmpresa = new MiLinkedList<>();
+		MyHeap<Integer, Empresa> heapEmpresas = new Heap<>(nombresEmpresas.size(), 1);  
 		
 		for (int i = 0; i < nombresEmpresas.size(); i++) {
 			
-			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).
+			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).getCantProdHabilitados();
 			
-			
+			heapEmpresas.insert(cantProd, empresas.get(nombresEmpresas.getElementoPorPos(i)));	
 		}
 		
+		for (int n = 0 ; n < 20; n ++){
+			empresasConMayorProdHab[n] = heapEmpresas.findAndDelete();
+		}
 		
-		
-		
-		
-		//hay que agregar heapSort a la carpeta de los tads
-		
-		HeapSort<Integer> heapToOrder = new HeapSort();
-
-		heapToOrder.order(cantElementosPorEmpresa);
-
-//		for (int n = 0; n < 20; n++) {
-//			for (int j = 0; j < 20; j++) {
-//				if (empresas.getElemento(nombresEmpresas.getElemento(n), Empresa)
-//						.getCantProductosHabilitados() == cantElementosPorEmpresa.getElemento(j)) {
-//					empresasConMayorProdHab[n] = empresas.getElemento(nombresEmpresas.getElemento(j), Empresa);
-//				}
-//			}
-//
-//		}
-
 		for (int i = 0; i < 20; i++) {
 			System.out.println(empresasConMayorProdHab[i].getNombre());
 		}

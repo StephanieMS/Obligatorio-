@@ -7,7 +7,7 @@ public class Marca {
 
 	private String nombre;
 	private MiListaEntero<Producto> productos;
-	private int cantProdHabi
+	private int cantProdHabilitados = 0;
 
 	public Marca(String nombMarca) {
 		this.nombre = nombMarca;
@@ -24,6 +24,14 @@ public class Marca {
 
 	public MiListaEntero<Producto> getProductos() {
 		return productos;
+	}
+
+	public int getCantProdHabilitados() {
+		return cantProdHabilitados;
+	}
+
+	public void setCantProdHabilitados() {
+		cantProdHabilitados++;
 	}
 
 
