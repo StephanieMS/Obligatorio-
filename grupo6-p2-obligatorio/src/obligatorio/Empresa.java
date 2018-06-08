@@ -8,6 +8,7 @@ public class Empresa {
 	private String nombre;
 	private String ruc;
 	private MiListaEntero<Producto> productos;
+	private int cantProdHabilitados = 0;
 
 	public Empresa(String nombre, String ruc) {
 		this.nombre = nombre;
@@ -25,6 +26,10 @@ public class Empresa {
 
 	public void setProductos(Producto prod) {
 		productos.addLast(prod);
+	}
+	
+	public void setCantProdHabilitados() {
+		cantProdHabilitados++;
 	}
 
 }

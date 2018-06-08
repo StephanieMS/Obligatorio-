@@ -120,6 +120,10 @@ public class Main {
 			
 			marcas.get(datos.get(i)[12]).setProducto(prod);
 			empresas.get(datos.get(i)[5]).setProductos(prod);
+			
+			if(prod.getEstaHabilitado() == true) {
+				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
+			}
 		}
 
 	}
@@ -128,42 +132,34 @@ public class Main {
 		
 		Empresa empresasConMayorProdHab[] = new Empresa[20];
 				
-		MyHeap<Integer, Empresa> empresasPorCantProdHab;
+		MiListaEntero<Integer> cantElementosPorEmpresa = new MiLinkedList<>();
 		
 		for (int i = 0; i < nombresEmpresas.size(); i++) {
 			
-			int cantProdHab = 0;
-			
-			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).getProductos().getContador();
-			
-			for(int k = 0; k < cantProd; k++) {
-				if(empresas.get(nombresEmpresas.getElementoPorPos(i)).getProductos().getElementoPorPos(k).getEstaHabilitado() == true) {
-					cantProdHab++;
-				}
-			}
+			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).
 			
 			
 		}
-		
 		
 		
 		
 		
 		
 		//hay que agregar heapSort a la carpeta de los tads
+		
 		HeapSort<Integer> heapToOrder = new HeapSort();
 
 		heapToOrder.order(cantElementosPorEmpresa);
 
-		for (int n = 0; n < 20; n++) {
-			for (int j = 0; j < 20; j++) {
-				if (empresas.getElemento(nombresEmpresas.getElemento(n), Empresa)
-						.getCantProductosHabilitados() == cantElementosPorEmpresa.getElemento(j)) {
-					empresasConMayorProdHab[n] = empresas.getElemento(nombresEmpresas.getElemento(j), Empresa);
-				}
-			}
-
-		}
+//		for (int n = 0; n < 20; n++) {
+//			for (int j = 0; j < 20; j++) {
+//				if (empresas.getElemento(nombresEmpresas.getElemento(n), Empresa)
+//						.getCantProductosHabilitados() == cantElementosPorEmpresa.getElemento(j)) {
+//					empresasConMayorProdHab[n] = empresas.getElemento(nombresEmpresas.getElemento(j), Empresa);
+//				}
+//			}
+//
+//		}
 
 		for (int i = 0; i < 20; i++) {
 			System.out.println(empresasConMayorProdHab[i].getNombre());

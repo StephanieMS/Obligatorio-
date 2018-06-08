@@ -7,6 +7,7 @@ public class Marca {
 
 	private String nombre;
 	private MiListaEntero<Producto> productos;
+	private int cantProdHabi
 
 	public Marca(String nombMarca) {
 		this.nombre = nombMarca;
