@@ -7,12 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 import com.opencsv.CSVReader;
 
-import p5.HeapSort;
+import AlgoritmosOrdenamiento.HeapSort;
 import uy.edu.um.prog2.adt.binarySearchTree.BinarySearchTree;
 import uy.edu.um.prog2.adt.binarySearchTree.MyBinarySearchTree;
 import uy.edu.um.prog2.adt.hash.ElementoYaExistenteException;
 import uy.edu.um.prog2.adt.hash.HashCerrado;
 import uy.edu.um.prog2.adt.hash.HashTable;
+import uy.edu.um.prog2.adt.heap.MyHeap;
 import uy.edu.um.prog2.adt.linkedlist.MiLinkedList;
 import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
 import uy.edu.um.prog2.adt.linkedlist.PosicionInvalida;
@@ -23,7 +24,7 @@ public class Main {
 	private static HashTable<String, Empresa> empresas;
 	private static HashTable<String, Pais> paises;
 	private static HashTable<String, Clase> clases;
-	private static MiListaEntero<String> rubros;
+	private static MyBinarySearchTree<String, Rubro> rubros;
 
 	private static MiListaEntero<String> nombresMarcas;
 	private static MiListaEntero<String> nombresEmpresas;
@@ -45,10 +46,11 @@ public class Main {
 		empresas = new HashCerrado<>(datos.size() / 4);
 
 		paises = new HashCerrado<>(193);
-
-		rubros = new MiLinkedList<>();
-
+		
 		clases = new HashCerrado<>(datos.size() / 2);
+
+		rubros = new BinarySearchTree<>();
+		
 
 		nombresMarcas = new MiLinkedList<>();
 
@@ -60,8 +62,7 @@ public class Main {
 
 		try {
 			cargarDatos(datos);
-		} catch (ElementoYaExistenteException e) {
-		}
+		} catch (ElementoYaExistenteException e) {}
 
 	}
 
@@ -77,7 +78,6 @@ public class Main {
 
 			if (marcas.pertenece(datos.get(i)[12]) == true) {
 				marcaProd = marcas.get(datos.get(i)[12]);
-
 			} else {
 				marcaProd = new Marca(datos.get(i)[12]);
 				marcas.insertar(datos.get(i)[12], marcaProd);
@@ -86,7 +86,6 @@ public class Main {
 
 			if (empresas.pertenece(datos.get(i)[5]) == true) {
 				empresaProd = empresas.get(datos.get(i)[5]);
-
 			} else {
 				empresaProd = new Empresa(datos.get(i)[5], datos.get(i)[23]);
 				empresas.insertar(datos.get(i)[5], empresaProd);
@@ -95,7 +94,6 @@ public class Main {
 
 			if (paises.pertenece(datos.get(i)[13]) == true) {
 				paisProd = paises.get(datos.get(i)[13]);
-
 			} else {
 				paisProd = new Pais(datos.get(i)[13]);
 				paises.insertar(datos.get(i)[13], paisProd);
@@ -104,38 +102,53 @@ public class Main {
 
 			if (clases.pertenece(datos.get(i)[10]) == true) {
 				claseProd = clases.get(datos.get(i)[10]);
-
 			} else {
 				claseProd = new Clase(datos.get(i)[10]);
 				clases.insertar(datos.get(i)[10], claseProd);
 				nombresClases.addLast(datos.get(i)[10]);
 			}
 
-			// sin terminar
-			if (rubros.existeElemento(datos.get(i)[3]) == true) {
-				rubroProd = rubros.get(datos.get(i)[5]); // tiene que ser una posicion porque el get busca por posicion
+			if (rubros.find(datos.get(i)[3]) != null) {
+				rubroProd = rubros.find(datos.get(i)[3]);
 			} else {
 				rubroProd = new Rubro(datos.get(i)[3]);
-				rubros.agregar(datos.get(i)[3]);
+				rubros.insert(datos.get(i)[3], rubroProd);
 			}
 
 			Producto prod = new Producto(datos.get(i)[0], datos.get(i)[1], datos.get(i)[2], datos.get(i)[20], marcaProd,
 					empresaProd, rubroProd, claseProd, paisProd);
-
+			
+			marcas.get(datos.get(i)[12]).setProducto(prod);
+			empresas.get(datos.get(i)[5]).setProductos(prod);
 		}
 
 	}
 
 	public static void obtenerEmpresas() {
+		
 		Empresa empresasConMayorProdHab[] = new Empresa[20];
-		MiListaEntero<Integer> cantElementosPorEmpresa = new MiLinkedList<>();
-
-		// la key en empresas.getElemento tiene que ser una empresa pero no se como
-		// poner cual empresa tiene que ser en esa posicion
+				
+		MyHeap<Integer, Empresa> empresasPorCantProdHab;
+		
 		for (int i = 0; i < nombresEmpresas.size(); i++) {
-			cantElementosPorEmpresa
-					.add(empresas.getElemento(nombresEmpresas.getElemento(i), Empresa).getCantProductosHabilitados());
+			
+			int cantProdHab = 0;
+			
+			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).getProductos().getContador();
+			
+			for(int k = 0; k < cantProd; k++) {
+				if(empresas.get(nombresEmpresas.getElementoPorPos(i)).getProductos().getElementoPorPos(k).getEstaHabilitado() == true) {
+					cantProdHab++;
+				}
+			}
+			
+			
 		}
+		
+		
+		
+		
+		
 		
 		//hay que agregar heapSort a la carpeta de los tads
 		HeapSort<Integer> heapToOrder = new HeapSort();

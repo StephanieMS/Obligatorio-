@@ -83,7 +83,7 @@ public class TestBinarySearchTree {
 		
 		for(int i = 0; i < searchTree.size(); i++) {
 			try {
-				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+				assertEquals(toCompare.getElementoPorPos(i), searchTree.getElementoPorPos(i));
 			} catch (PosicionInvalida e) {
 			}
 		}
@@ -119,7 +119,7 @@ public class TestBinarySearchTree {
 		
 		for(int i = 0; i < searchTree.size(); i++) {
 			try {
-				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+				assertEquals(toCompare.getElementoPorPos(i), searchTree.getElementoPorPos(i));
 			} catch (PosicionInvalida e) {
 			}
 		}
@@ -155,7 +155,7 @@ public class TestBinarySearchTree {
 		
 		for(int i = 0; i < searchTree.size(); i++) {
 			try {
-				assertEquals(toCompare.getElemento(i), searchTree.getElemento(i));
+				assertEquals(toCompare.getElementoPorPos(i), searchTree.getElementoPorPos(i));
 			} catch (PosicionInvalida e) {
 			}
 		}

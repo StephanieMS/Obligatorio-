@@ -5,15 +5,27 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 	private Nodo<V> primero;
 	private int contador = 0;
 
-	public void agregar(V nValue) {
+	public void addFirst(V nValue) {
+		
+		if(primero != null) {
+			Nodo<V> temp = primero;
+			
+			primero = new Nodo<>(nValue);
+			
+			primero.setSiguiente(temp);
+		}else {
+			primero = new Nodo<>(nValue);
+		}
+	
+	}
+	
+	public void addLast(V nValue) {
 
 		Nodo<V> oItem = new Nodo<>(nValue);
 
 		if (primero == null) {
 			primero = oItem;
-		}
-
-		else {
+		}else {
 			Nodo<V> ultimo = primero;
 
 			while (ultimo.getSiguiente() != null) {
@@ -38,7 +50,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 		return size;
 	}
 
-	public V getElemento(int posicion) throws PosicionInvalida {
+	public V getElementoPorPos(int posicion) throws PosicionInvalida {
 		Nodo<V> oTemp = this.primero;
 
 		for (int i = 0; i < posicion; i++) {
@@ -56,7 +68,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 
 	public void eliminarElemento(V value) {
 		if (primero == null) {
-			System.out.println("--NO HAY ELEMENTOS CARGADOS EN LA LISTA--");
+//			System.out.println("--NO HAY ELEMENTOS CARGADOS EN LA LISTA--");
 		}
 
 		if (primero != null) {
@@ -64,7 +76,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 				Nodo<V> toDelete = primero;
 				primero = primero.getSiguiente();
 				toDelete.setSiguiente(null);
-				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
+//				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
 			}
 		}
 
@@ -75,7 +87,7 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 				Nodo<V> toDelete = temp.getSiguiente();
 				temp.setSiguiente(toDelete.getSiguiente());
 				toDelete.setSiguiente(null);
-				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
+//				System.out.println("EL VALOR " + value + " HA SIDO ELIMINADO DE LA LISTA");
 			} else {
 				temp = temp.getSiguiente();
 			}
@@ -102,27 +114,6 @@ public class MiLinkedList<V> implements MiListaEntero<V> {
 			}
 		}
 		return existeElemento;
-	}
-
-	public void addFirst(V Value) {
-		Nodo<V> oItem = new Nodo<>(Value);
-
-		primero.setValor(oItem.getValor());
-	}
-
-	public void addLast(V Value) {
-
-		if (primero == null) {
-			primero = new Nodo<>(Value);
-		} else {
-			Nodo<V> oItem = new Nodo<>(Value);
-			Nodo<V> temp = primero;
-			while (temp.getSiguiente() != null) {
-				temp = temp.getSiguiente();
-			}
-			temp.setSiguiente(oItem);
-		}
-
 	}
 
 	public int getContador() {

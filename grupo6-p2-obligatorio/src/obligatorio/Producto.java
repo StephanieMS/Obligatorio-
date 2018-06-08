@@ -11,6 +11,7 @@ public class Producto {
 	private Rubro pRubro;
 	private Clase pClase;
 	private Pais pPais;
+	private boolean estaHabilitado = false;
 
 	public Producto(String nombre, String nombreFantasia, String idProd, String estado, Marca marca, Empresa empresa,
 			Rubro rubro, Clase clase, Pais pais) {
@@ -19,12 +20,19 @@ public class Producto {
 		this.nombreFantasia = nombreFantasia;
 		this.idProd = idProd;
 		this.estado = estado;
+		if(estado.equals("HABILITADO")) {
+			estaHabilitado = true;
+		}
 		pMarca = marca;
 		pEmpresa = empresa;
 		pRubro = rubro;
 		pClase = clase;
 		pPais = pais;
 
+	}
+	
+	public boolean getEstaHabilitado() {
+		return estaHabilitado;
 	}
 
 }

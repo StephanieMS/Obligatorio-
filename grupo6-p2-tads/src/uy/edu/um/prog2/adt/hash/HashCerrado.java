@@ -184,7 +184,6 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		}
 		size = nuevoSize;
 		vector = vectorNuevo;
-		System.out.println("--SE AGRANDA HASH--");
 	}
 	
 	

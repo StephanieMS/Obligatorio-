@@ -10,13 +10,13 @@ public class TestLinkedList {
 	
 	@Test
 	public void testAgregar() {
-		lista.agregar(1);
-		lista.agregar(2);
-		lista.agregar(3);
-		lista.agregar(4);
+		lista.addLast(1);
+		lista.addLast(2);
+		lista.addLast(3);
+		lista.addLast(4);
 		
 		try {
-			if(lista.getElemento(2)!= 3) {
+			if(lista.getElementoPorPos(2)!= 3) {
 					fail();
 			}
 		} catch (PosicionInvalida e) {
@@ -26,15 +26,15 @@ public class TestLinkedList {
 	
 	@Test
 	public void testEliminarElemento() {
-		lista.agregar(1);
-		lista.agregar(2);
-		lista.agregar(3);
-		lista.agregar(4);
+		lista.addLast(1);
+		lista.addLast(2);
+		lista.addLast(3);
+		lista.addLast(4);
 		
 		
 		try {
 			lista.eliminarElemento(3);
-			if(lista.getElemento(2)!= 4) {
+			if(lista.getElementoPorPos(2)!= 4) {
 				fail();
 			}
 		} catch (PosicionInvalida e) {
@@ -46,12 +46,12 @@ public class TestLinkedList {
 	
 	@Test
 	public void testAddLast() {
-		lista.agregar(1);
-		lista.agregar(2);
+		lista.addLast(1);
+		lista.addLast(2);
 		lista.addLast(3);
 		
 		try {
-			if(lista.getElemento(2)!= 3) {
+			if(lista.getElementoPorPos(2)!= 3) {
 				fail();
 			}
 		} catch (PosicionInvalida e) {
@@ -62,12 +62,12 @@ public class TestLinkedList {
 	
 	@Test
 	public void testAddFirst() {
-		lista.agregar(1);
-		lista.agregar(2);
+		lista.addLast(1);
+		lista.addLast(2);
 		lista.addFirst(3);
 		
 		try {
-			if(lista.getElemento(0)!=3) {
+			if(lista.getElementoPorPos(0)!=3) {
 				fail();
 			}
 		} catch (PosicionInvalida e) {
@@ -77,10 +77,10 @@ public class TestLinkedList {
 	
 	@Test
 	public void testSize() {
-		lista.agregar(1);
-		lista.agregar(2);
-		lista.agregar(3);
-		lista.agregar(4);
+		lista.addLast(1);
+		lista.addLast(2);
+		lista.addLast(3);
+		lista.addLast(4);
 		
 		assertEquals(4, lista.size());
 	}

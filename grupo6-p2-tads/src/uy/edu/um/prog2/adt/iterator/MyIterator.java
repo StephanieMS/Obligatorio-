@@ -1,19 +1,18 @@
 package uy.edu.um.prog2.adt.iterator;
 
 import java.util.Iterator;
-
 import uy.edu.um.prog2.adt.hash.HashNode;
 
 public class MyIterator<K , T> implements Iterator<T> {
 
-	protected int posicion = 0;
-	protected HashNode<K, T>[] vectorHash;
+	private int posicion = 0;
+	private HashNode<K, T>[] vectorHash;
 
 	public MyIterator(HashNode<K,T>[] vector) {
 		
-		vectorHash=vector;
+		vectorHash = vector;
 		
-		while(vectorHash[posicion]==null  || vectorHash[posicion].getEstaBorrado()) {
+		while(vectorHash[posicion] == null  || vectorHash[posicion].getEstaBorrado()) {
 			posicion++;
 		}
 
@@ -22,12 +21,13 @@ public class MyIterator<K , T> implements Iterator<T> {
 	
 	public boolean hasNext() {
 		
-		boolean bExit=false;
+		boolean bExit = false;
 		
 		int count =posicion;
-		 while(!bExit && count< vectorHash.length) {
+		
+		while(!bExit && count < vectorHash.length) {
 			 
-			 if(vectorHash[count]!=null && !vectorHash[count].getEstaBorrado()) {
+			 if(vectorHash[count] != null && !vectorHash[count].getEstaBorrado()) {
 				 bExit = true;
 			 }
 			 count++;
@@ -45,7 +45,9 @@ public class MyIterator<K , T> implements Iterator<T> {
 		while(posicion<vectorHash.length && ( vectorHash[posicion] == null || vectorHash[posicion].getEstaBorrado() )) {
 			posicion++;
 		}
+		
 		oExit= vectorHash[posicion].getValor();
+		
 		return oExit;
 	}
 
