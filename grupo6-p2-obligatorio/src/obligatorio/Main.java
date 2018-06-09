@@ -63,6 +63,10 @@ public class Main {
 		cargarDatos(datos);
 		
 		obtenerEmpresas();
+		
+		System.out.println(" ");
+		
+		obtenerMarcas();
 
 	}
 
@@ -119,6 +123,7 @@ public class Main {
 					empresaProd, rubroProd, claseProd, paisProd);
 			
 			marcas.get(datos.get(i)[12]).setProducto(prod);
+			marcas.get(datos.get(i)[12]).setPaisMarca(paisProd);
 			empresas.get(datos.get(i)[5]).setProductos(prod);
 			
 			if(prod.getEstaHabilitado() == true) {
@@ -147,9 +152,34 @@ public class Main {
 		}
 		
 		for (int i = 0; i < 20; i++) {
-			System.out.println(empresasConMayorProdHab[i].getNombre());
+			System.out.println("Nombre:" + empresasConMayorProdHab[i].getNombre() + " -- Poductos:" + empresasConMayorProdHab[i].getCantProdHabilitados());
 		}
 
+	}
+	
+	public static void obtenerMarcas() throws PosicionInvalida, HeapVacio {
+		
+		Marca marcasConMayorProdHab[] = new Marca[10];
+		
+		MyHeap<Integer, Marca> heapMarcas = new Heap<>(nombresMarcas.size(), 1);  
+		
+		for (int i = 0; i < nombresMarcas.size(); i++) {
+			
+			int cantProd = marcas.get(nombresMarcas.getElementoPorPos(i)).getCantProdHabilitados();
+			
+			heapMarcas.insert(cantProd, marcas.get(nombresMarcas.getElementoPorPos(i)));	
+		}
+		
+		for (int n = 0 ; n < 10; n ++){
+			marcasConMayorProdHab[n] = heapMarcas.findAndDelete();
+		}
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Nombre:" + marcasConMayorProdHab[i].getNombre() + " -- Pais:" + 
+					marcasConMayorProdHab[i].getPaisMarca().getNombre() + " -- Productos:" + 
+					marcasConMayorProdHab[i].getCantProdHabilitados());
+		}
+		
 	}
 
 }

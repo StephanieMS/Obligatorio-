@@ -7,6 +7,7 @@ public class Marca {
 
 	private String nombre;
 	private MiListaEntero<Producto> productos;
+	private Pais paisMarca;
 	private int cantProdHabilitados = 0;
 
 	public Marca(String nombMarca) {
@@ -32,6 +33,14 @@ public class Marca {
 
 	public void setCantProdHabilitados() {
 		cantProdHabilitados++;
+	}
+
+	public Pais getPaisMarca() {
+		return paisMarca;
+	}
+
+	public void setPaisMarca(Pais paisMarca) {
+		this.paisMarca = paisMarca;
 	}
 
 
