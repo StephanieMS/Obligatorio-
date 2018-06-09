@@ -4,7 +4,7 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 	
 	private HashNode<K, V>[] vector;
 	private int size;
-	int cantElementos = 0;
+	private int cantElementos = 0;
 
 	public HashCerrado(int sizeInicial) {
 		this.size = sizeInicial;
@@ -185,6 +185,12 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 		size = nuevoSize;
 		vector = vectorNuevo;
 	}
+
+	public int getCantElementos() {
+		return cantElementos;
+	}
+	
+	
 	
 	
 
