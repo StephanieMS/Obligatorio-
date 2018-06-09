@@ -181,5 +181,28 @@ public class Main {
 		}
 		
 	}
+	
+	public static void obtenerPaises() throws PosicionInvalida, HeapVacio {
+			
+			Pais paisesConMayorProdHab[] = new Pais[10];
+			
+			MyHeap<Integer, Pais> heapPaises = new Heap<>(nombresPaises.size(), 1);  
+			
+			for (int i = 0; i < nombresPaises.size(); i++) {
+				
+				int cantProd = paises.get(nombresPaises.getElementoPorPos(i)).getCantProdHabilitados();
+				
+				heapPaises.insert(cantProd, paises.get(nombresPaises.getElementoPorPos(i)));
+				
+			}
+			
+			for (int n = 0 ; n < 10; n ++){
+				paisesConMayorProdHab[n] = heapPaises.findAndDelete();
+			}
+			
+			for (int i = 0; i < 10; i++) {
+				System.out.println("Pais:" + paisesConMayorProdHab[i].getNombre() + " -- Productos:" + paisesConMayorProdHab[i].getCantProdHabilitados());
+			}
+		}
 
 }
