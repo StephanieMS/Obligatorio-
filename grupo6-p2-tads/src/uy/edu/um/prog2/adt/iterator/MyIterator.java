@@ -18,7 +18,6 @@ public class MyIterator<K , T> implements Iterator<T> {
 
 	}
 
-	
 	public boolean hasNext() {
 		
 		boolean bExit = false;

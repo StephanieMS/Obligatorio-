@@ -10,4 +10,6 @@ public interface HashTable<K extends Comparable<K>, V> {
 	
 	public V get(K clave);
 	
+	public int getCantElementos();
+	
 }
