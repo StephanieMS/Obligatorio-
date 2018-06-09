@@ -6,7 +6,7 @@ import uy.edu.um.prog2.adt.heap.*;
 
 public class HeapSort<T extends Comparable<T>> {
 
-	public void order(List<T> toOrder) {
+	public void order(List<T> toOrder) throws HeapVacio {
 		
 		int size = toOrder.size();
 		

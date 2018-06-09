@@ -10,13 +10,13 @@ public class BinarySearchTree <K extends Comparable<K>,T> implements MyBinarySea
 	
 	public T find(K key) {
 		T exit = null;
-		
-		try {
-			exit = root.find(key);
-		}catch(FindException e1) {
-//			System.out.println(e1.getMessage());
+		if(root != null) {
+			try {
+				exit = root.find(key);
+			}catch(FindException e1) {
+	//			System.out.println(e1.getMessage());
+			}
 		}
-		
 		return exit;
 	}
 	

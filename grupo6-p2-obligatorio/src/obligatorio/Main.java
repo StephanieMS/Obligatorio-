@@ -2,18 +2,16 @@ package obligatorio;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import com.opencsv.CSVReader;
 
-import AlgoritmosOrdenamiento.HeapSort;
 import uy.edu.um.prog2.adt.binarySearchTree.BinarySearchTree;
 import uy.edu.um.prog2.adt.binarySearchTree.MyBinarySearchTree;
 import uy.edu.um.prog2.adt.hash.ElementoYaExistenteException;
 import uy.edu.um.prog2.adt.hash.HashCerrado;
 import uy.edu.um.prog2.adt.hash.HashTable;
 import uy.edu.um.prog2.adt.heap.Heap;
+import uy.edu.um.prog2.adt.heap.HeapVacio;
 import uy.edu.um.prog2.adt.heap.MyHeap;
 import uy.edu.um.prog2.adt.linkedlist.MiLinkedList;
 import uy.edu.um.prog2.adt.linkedlist.MiListaEntero;
@@ -32,10 +30,11 @@ public class Main {
 	private static MiListaEntero<String> nombresPaises;
 	private static MiListaEntero<String> nombresClases;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ElementoYaExistenteException, PosicionInvalida, HeapVacio {
 
 		String fileName = "v_producto_real_updated.csv";
 
+		@SuppressWarnings("deprecation")
 		CSVReader csvReader = new CSVReader(new FileReader(fileName), ';');
 
 		List<String[]> datos = csvReader.readAll();
@@ -61,15 +60,15 @@ public class Main {
 
 		nombresClases = new MiLinkedList<>();
 
-		try {
-			cargarDatos(datos);
-		} catch (ElementoYaExistenteException e) {}
+		cargarDatos(datos);
+		
+		obtenerEmpresas();
 
 	}
 
 	public static void cargarDatos(List<String[]> datos) throws ElementoYaExistenteException {
 
-		for (int i = 1; i < datos.size() / 8; i++) {
+		for (int i = 1; i < datos.size() ; i++) {
 
 			Marca marcaProd = null;
 			Empresa empresaProd = null;
@@ -125,13 +124,12 @@ public class Main {
 			if(prod.getEstaHabilitado() == true) {
 				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
 				marcas.get(datos.get(i)[12]).setCantProdHabilitados();
-				
 			}
 		}
 
 	}
 
-	public static void obtenerEmpresas() throws PosicionInvalida {
+	public static void obtenerEmpresas() throws PosicionInvalida, HeapVacio {
 		
 		Empresa empresasConMayorProdHab[] = new Empresa[20];
 				

@@ -59,7 +59,7 @@ public class TestHeap {
 	
 	
 	@Test
-	public void testDelete() {
+	public void testDelete() throws HeapVacio {
 		
 		lista.insert(1,"A");
 		lista.insert(2,"B");
