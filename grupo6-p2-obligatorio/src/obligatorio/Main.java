@@ -68,6 +68,9 @@ public class Main {
 		
 		obtenerMarcas();
 
+		System.out.println(" ");
+		
+		obtenerPaises();
 	}
 
 	public static void cargarDatos(List<String[]> datos) throws ElementoYaExistenteException {
@@ -129,6 +132,7 @@ public class Main {
 			if(prod.getEstaHabilitado() == true) {
 				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
 				marcas.get(datos.get(i)[12]).setCantProdHabilitados();
+				paises.get(datos.get(i)[13]).setCantProdHabilitados();
 			}
 		}
 
@@ -181,5 +185,6 @@ public class Main {
 		}
 		
 	}
+	
 
 }
