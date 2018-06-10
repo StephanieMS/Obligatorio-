@@ -31,7 +31,7 @@ public class Main {
 	private static MiListaEntero<String> nombresEmpresas;
 	private static MiListaEntero<String> nombresPaises;
 	private static MiListaEntero<String> nombresClases;
-	
+
 	public static void main(String[] args)
 			throws IOException, ElementoYaExistenteException, PosicionInvalida, HeapVacio {
 
@@ -64,6 +64,12 @@ public class Main {
 
 		nombresClases = new MiLinkedList<>();
 
+		long time_start;
+		long time_end;
+		long time;
+
+		time_start = System.currentTimeMillis();
+		
 		cargarDatos(datos);
 
 		obtenerEmpresas();
@@ -75,7 +81,12 @@ public class Main {
 		System.out.println(" ");
 		
 		obtenerPaises();
-		
+
+		time_end = System.currentTimeMillis();
+		time = time_end - time_start;
+
+		System.out.print("Tiempo de reportes: " + time / 1000 + " segundos");
+
 	}
 
 	public static void cargarDatos(List<String[]> datos) throws ElementoYaExistenteException {
@@ -199,7 +210,7 @@ public class Main {
 		Pais paisesConMayorProdHab[] = new Pais[10];
 
 		MyHeap<Integer, Pais> heapPaises = new Heap<>(nombresPaises.size(), 1);
-		
+
 		int porcentaje;
 
 		for (int i = 0; i < nombresPaises.size(); i++) {
@@ -215,16 +226,12 @@ public class Main {
 		}  
 
 		for (int i = 0; i < 10; i++) {
+
 			porcentaje = (paisesConMayorProdHab[i].getCantProdHabilitados()*100) / (prodHabilitados.getCantElementos());
 			
 			System.out.println("Pais:" + paisesConMayorProdHab[i].getNombre() + " -- Productos Habilitados:"
 					+ paisesConMayorProdHab[i].getCantProdHabilitados() + " -- Porcentaje:" + porcentaje + "%");
 		}
-	}
-	
-	public void obtenerClasesPorPais() {
-		
-		
 		
 	}
 	
