@@ -24,6 +24,7 @@ public class Main {
 	private static HashTable<String, Pais> paises;
 	private static HashTable<String, Clase> clases;
 	private static MyBinarySearchTree<String, Rubro> rubros;
+	
 	private static HashTable<Integer, Producto> prodHabilitados;
 
 	private static MiListaEntero<String> nombresMarcas;
@@ -66,23 +67,15 @@ public class Main {
 		cargarDatos(datos);
 
 		obtenerEmpresas();
-
-		System.out.println(" ");
-
-		obtenerMarcas();
 		
 		System.out.println(" ");
 		
-<<<<<<< HEAD
 		obtenerMarcas();
 
 		System.out.println(" ");
 		
 		obtenerPaises();
-=======
-		obtenerPaises();
 		
->>>>>>> 03845f804549d7de3c475e74fca274c1bc5b2e7d
 	}
 
 	public static void cargarDatos(List<String[]> datos) throws ElementoYaExistenteException {
@@ -136,6 +129,7 @@ public class Main {
 
 			Producto prod = new Producto(datos.get(i)[0], datos.get(i)[1], datos.get(i)[2], datos.get(i)[20], marcaProd,
 					empresaProd, rubroProd, claseProd, paisProd);
+			
 			int keyProducto = (datos.get(i)[0] + datos.get(i)[2] + datos.get(i)[4]).hashCode();
 
 			marcas.get(datos.get(i)[12]).setProducto(prod);
@@ -147,13 +141,8 @@ public class Main {
 				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
 				marcas.get(datos.get(i)[12]).setCantProdHabilitados();
 				paises.get(datos.get(i)[13]).setCantProdHabilitados();
-<<<<<<< HEAD
-=======
-				
->>>>>>> 03845f804549d7de3c475e74fca274c1bc5b2e7d
 			}
 		}
-
 	}
 
 	public static void obtenerEmpresas() throws PosicionInvalida, HeapVacio {
@@ -223,15 +212,20 @@ public class Main {
 
 		for (int n = 0; n < 10; n++) {
 			paisesConMayorProdHab[n] = heapPaises.findAndDelete();
-		}
+		}  
 
 		for (int i = 0; i < 10; i++) {
-			porcentaje = (paisesConMayorProdHab[i].getCantProdHabilitados()*100)/ (prodHabilitados.getCantElementos());
+			porcentaje = (paisesConMayorProdHab[i].getCantProdHabilitados()*100) / (prodHabilitados.getCantElementos());
 			
 			System.out.println("Pais:" + paisesConMayorProdHab[i].getNombre() + " -- Productos Habilitados:"
 					+ paisesConMayorProdHab[i].getCantProdHabilitados() + " -- Porcentaje:" + porcentaje + "%");
-			
 		}
+	}
+	
+	public void obtenerClasesPorPais() {
+		
+		
+		
 	}
 	
 
