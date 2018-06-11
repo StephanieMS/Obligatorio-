@@ -8,12 +8,13 @@ public class Empresa {
 	private String nombre;
 	private String ruc;
 	private MiListaEntero<Producto> productos;
-	private int cantProdHabilitados = 0;
+	private MiListaEntero<Producto> productosHabilitados;
 
 	public Empresa(String nombre, String ruc) {
 		this.nombre = nombre;
 		this.ruc = ruc;
 		productos = new MiLinkedList<>();
+		productosHabilitados = new MiLinkedList<>();
 	}
 
 	public String getNombre() {
@@ -27,13 +28,15 @@ public class Empresa {
 	public void setProductos(Producto prod) {
 		productos.addLast(prod);
 	}
-	
-	public void setCantProdHabilitados() {
-		cantProdHabilitados++;
+
+	public MiListaEntero<Producto> getProductosHabilitados() {
+		return productosHabilitados;
+	}
+
+	public void setProductosHabilitados(Producto prod) {
+		productosHabilitados.addLast(prod);
 	}
 	
-	public int getCantProdHabilitados() {
-		return cantProdHabilitados;
-	}
+	
 
 }

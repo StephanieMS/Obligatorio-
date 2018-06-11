@@ -7,12 +7,13 @@ public class Marca {
 
 	private String nombre;
 	private MiListaEntero<Producto> productos;
+	private MiListaEntero<Producto> productosHabilitados;
 	private Pais paisMarca;
-	private int cantProdHabilitados = 0;
 
 	public Marca(String nombMarca) {
 		this.nombre = nombMarca;
 		productos = new MiLinkedList<>();
+		productosHabilitados = new MiLinkedList<>();
 	}
 
 	public String getNombre() {
@@ -27,20 +28,20 @@ public class Marca {
 		return productos;
 	}
 
-	public int getCantProdHabilitados() {
-		return cantProdHabilitados;
-	}
-
-	public void setCantProdHabilitados() {
-		cantProdHabilitados++;
-	}
-
 	public Pais getPaisMarca() {
 		return paisMarca;
 	}
 
 	public void setPaisMarca(Pais paisMarca) {
 		this.paisMarca = paisMarca;
+	}
+
+	public MiListaEntero<Producto> getProductosHabilitados() {
+		return productosHabilitados;
+	}
+
+	public void setProductosHabilitados(Producto prod) {
+		productosHabilitados.addLast(prod);
 	}
 
 

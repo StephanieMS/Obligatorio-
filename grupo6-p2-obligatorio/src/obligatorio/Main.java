@@ -66,11 +66,17 @@ public class Main {
 
 		nombresClases = new MiLinkedList<>();
 		
-		cargarDatos(datos);
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Presione una tecla para cargar datos");
 		
 		System.out.println(" ");
 		
-		Scanner sc = new Scanner(System.in);
+		if(sc.nextLine() != null) {
+			cargarDatos(datos);
+		}
+		
+		System.out.println(" ");
 		
 		int opcion = 0;
 		
@@ -112,6 +118,7 @@ public class Main {
 			}
 			
 		}
+		sc.close();
 
 	}
 	
@@ -143,6 +150,10 @@ public class Main {
 			Clase claseProd = null;
 			Rubro rubroProd = null;
 			
+			if(datos.get(i)[12].contains("  ")) {
+				datos.get(i)[12] = datos.get(i)[12].replace("  "," ");
+			}
+			
 			String keyMarca = datos.get(i)[12] + datos.get(i)[13];
 			String keyClase = datos.get(i)[10] + datos.get(i)[13];
 
@@ -161,7 +172,7 @@ public class Main {
 				empresas.insertar(datos.get(i)[5], empresaProd);
 				nombresEmpresas.addLast(datos.get(i)[5]);
 			}
-
+				
 			if (paises.pertenece(datos.get(i)[13]) == true) {
 				paisProd = paises.get(datos.get(i)[13]);
 			} else {
@@ -184,7 +195,7 @@ public class Main {
 				rubroProd = new Rubro(datos.get(i)[3]);
 				rubros.insert(datos.get(i)[3], rubroProd);
 			}
-
+			
 			Producto prod = new Producto(datos.get(i)[0], datos.get(i)[1], datos.get(i)[2], datos.get(i)[20], marcaProd,
 					empresaProd, rubroProd, claseProd, paisProd);
 			
@@ -197,17 +208,16 @@ public class Main {
 
 			if (prod.getEstaHabilitado() == true) {
 				prodHabilitados.insertar(keyProducto, prod);
-				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
-				marcas.get(keyMarca).setCantProdHabilitados();
-				paises.get(datos.get(i)[13]).setCantProdHabilitados();
-				clases.get(keyClase).setCantProdHabilitados();
+				marcas.get(keyMarca).setProductosHabilitados(prod);
+				empresas.get(datos.get(i)[5]).setProductosHabilitados(prod);
+				clases.get(keyClase).setProductosHabilitados(prod);
 			}
 		}
 		
 		time_end = System.currentTimeMillis();
 		time = time_end - time_start;
 		
-		System.out.println("Tiempo de Carga de datos: " + time / 1000 + " segundos");
+		System.out.println("Tiempo de Carga de datos: " + time + " milisegundos");
 	}
 
 	public static void obtenerEmpresas() throws PosicionInvalida, HeapVacio {
@@ -224,7 +234,7 @@ public class Main {
 
 		for (int i = 0; i < nombresEmpresas.size(); i++) {
 
-			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).getCantProdHabilitados();
+			int cantProd = empresas.get(nombresEmpresas.getElementoPorPos(i)).getProductosHabilitados().size();
 
 			heapEmpresas.insert(cantProd, empresas.get(nombresEmpresas.getElementoPorPos(i)));
 		}
@@ -235,7 +245,7 @@ public class Main {
 
 		for (int i = 0; i < 20; i++) {
 			System.out.println("Empresa:" + empresasConMayorProdHab[i].getNombre() + " -- Poductos Habilitados:"
-					+ empresasConMayorProdHab[i].getCantProdHabilitados());
+					+ empresasConMayorProdHab[i].getProductosHabilitados().size());
 		}
 		
 		time_end = System.currentTimeMillis();
@@ -243,7 +253,7 @@ public class Main {
 		
 		System.out.println(" ");
 
-		System.out.println("Tiempo de reporte: " + time / 1000 + " segundos");
+		System.out.println("Tiempo de reporte: " + time + " milisegundos");
 	}
 
 	public static void obtenerMarcas() throws PosicionInvalida, HeapVacio {
@@ -260,7 +270,7 @@ public class Main {
 
 		for (int i = 0; i < nombresMarcas.size(); i++) {
 
-			int cantProd = marcas.get(nombresMarcas.getElementoPorPos(i)).getCantProdHabilitados();
+			int cantProd = marcas.get(nombresMarcas.getElementoPorPos(i)).getProductosHabilitados().size();
 
 			heapMarcas.insert(cantProd, marcas.get(nombresMarcas.getElementoPorPos(i)));
 		}
@@ -272,7 +282,7 @@ public class Main {
 		for (int i = 0; i < 10; i++) {
 			System.out.println("Marca:" + marcasConMayorProdHab[i].getNombre() + " -- Pais:"
 					+ marcasConMayorProdHab[i].getPaisMarca().getNombre() + " -- Productos Habilitados:"
-					+ marcasConMayorProdHab[i].getCantProdHabilitados());
+					+ marcasConMayorProdHab[i].getProductosHabilitados().size());
 		}
 		
 		time_end = System.currentTimeMillis();
@@ -280,7 +290,7 @@ public class Main {
 		
 		System.out.println(" ");
 
-		System.out.println("Tiempo de reporte: " + time / 1000 + " segundos");
+		System.out.println("Tiempo de reporte: " + time + " milisegundos");
 
 	}
 
@@ -300,7 +310,7 @@ public class Main {
 
 		for (int i = 0; i < nombresPaises.size(); i++) {
 
-			int cantProd = paises.get(nombresPaises.getElementoPorPos(i)).getCantProdHabilitados();
+			int cantProd = paises.get(nombresPaises.getElementoPorPos(i)).getProductosHabilitados().size();
 
 			heapPaises.insert(cantProd, paises.get(nombresPaises.getElementoPorPos(i)));
 
@@ -312,10 +322,10 @@ public class Main {
 
 		for (int i = 0; i < 10; i++) {
 
-			porcentaje = (paisesConMayorProdHab[i].getCantProdHabilitados()*100) / (prodHabilitados.getCantElementos());
+			porcentaje = (paisesConMayorProdHab[i].getProductosHabilitados().size()*100) / (prodHabilitados.getCantElementos());
 			
 			System.out.println("Pais:" + paisesConMayorProdHab[i].getNombre() + " -- Productos Habilitados:"
-					+ paisesConMayorProdHab[i].getCantProdHabilitados() + " -- Porcentaje:" + porcentaje + "%");
+					+ paisesConMayorProdHab[i].getProductosHabilitados().size() + " -- Porcentaje:" + porcentaje + "%");
 		}
 		
 		time_end = System.currentTimeMillis();
@@ -323,7 +333,7 @@ public class Main {
 		
 		System.out.println(" ");
 
-		System.out.println("Tiempo de reporte: " + time / 1000 + " segundos");	
+		System.out.println("Tiempo de reporte: " + time + " milisegundos");	
 	}
 	
 	public static void obtenerClases() throws PosicionInvalida, HeapVacio {
@@ -340,7 +350,7 @@ public class Main {
 		
 		for (int i = 0; i < nombresClases.size(); i++) {
 
-			int cantProd = clases.get(nombresClases.getElementoPorPos(i)).getCantProdHabilitados();
+			int cantProd = clases.get(nombresClases.getElementoPorPos(i)).getProductosHabilitados().size();
 
 			heapClases.insert(cantProd, clases.get(nombresClases.getElementoPorPos(i)));
 		}
@@ -352,7 +362,7 @@ public class Main {
 		for (int i = 0; i < 10; i++) {
 			System.out.println("Clase:" + clasesConMayorProdHab[i].getNombre() + " -- Pais:"
 					+ clasesConMayorProdHab[i].getPaisClase().getNombre() + " -- Productos Habilitados:"
-					+ clasesConMayorProdHab[i].getCantProdHabilitados());
+					+ clasesConMayorProdHab[i].getProductosHabilitados().size());
 		}
 		
 		time_end = System.currentTimeMillis();
@@ -360,7 +370,7 @@ public class Main {
 		
 		System.out.println(" ");
 
-		System.out.println("Tiempo de reporte: " + time / 1000 + " segundos");
+		System.out.println("Tiempo de reporte: " + time + " milisegundos");
 	}
 	
 
