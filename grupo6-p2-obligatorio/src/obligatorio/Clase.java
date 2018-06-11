@@ -4,6 +4,7 @@ public class Clase {
 	
 	private String nombre;
 	private int cantProdHabilitados = 0;
+	private Pais paisClase;
 
 	public Clase(String nombre) {
 		this.nombre = nombre;
@@ -21,5 +22,11 @@ public class Clase {
 		return cantProdHabilitados;
 	}
 	
-	
+	public Pais getPaisClase() {
+		return paisClase;
+	}
+
+	public void setPaisClase(Pais paisClase) {
+		this.paisClase = paisClase;
+	}
 }

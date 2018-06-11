@@ -81,6 +81,10 @@ public class Main {
 		System.out.println(" ");
 		
 		obtenerPaises();
+		
+		System.out.println(" ");
+		
+		obtenerClases();
 
 		time_end = System.currentTimeMillis();
 		time = time_end - time_start;
@@ -146,12 +150,14 @@ public class Main {
 			marcas.get(datos.get(i)[12]).setProducto(prod);
 			marcas.get(datos.get(i)[12]).setPaisMarca(paisProd);
 			empresas.get(datos.get(i)[5]).setProductos(prod);
+			clases.get(datos.get(i)[10]).setPaisClase(paisProd);
 
 			if (prod.getEstaHabilitado() == true) {
 				prodHabilitados.insertar(keyProducto, prod);
 				empresas.get(datos.get(i)[5]).setCantProdHabilitados();
 				marcas.get(datos.get(i)[12]).setCantProdHabilitados();
 				paises.get(datos.get(i)[13]).setCantProdHabilitados();
+				clases.get(datos.get(i)[10]).setCantProdHabilitados();
 			}
 		}
 	}
@@ -174,7 +180,7 @@ public class Main {
 		}
 
 		for (int i = 0; i < 20; i++) {
-			System.out.println("Nombre:" + empresasConMayorProdHab[i].getNombre() + " -- Poductos Habilitados:"
+			System.out.println("Empresa:" + empresasConMayorProdHab[i].getNombre() + " -- Poductos Habilitados:"
 					+ empresasConMayorProdHab[i].getCantProdHabilitados());
 		}
 
@@ -198,7 +204,7 @@ public class Main {
 		}
 
 		for (int i = 0; i < 10; i++) {
-			System.out.println("Nombre:" + marcasConMayorProdHab[i].getNombre() + " -- Pais:"
+			System.out.println("Marca:" + marcasConMayorProdHab[i].getNombre() + " -- Pais:"
 					+ marcasConMayorProdHab[i].getPaisMarca().getNombre() + " -- Productos Habilitados:"
 					+ marcasConMayorProdHab[i].getCantProdHabilitados());
 		}
@@ -231,6 +237,31 @@ public class Main {
 			
 			System.out.println("Pais:" + paisesConMayorProdHab[i].getNombre() + " -- Productos Habilitados:"
 					+ paisesConMayorProdHab[i].getCantProdHabilitados() + " -- Porcentaje:" + porcentaje + "%");
+		}
+		
+	}
+	
+	public static void obtenerClases() throws PosicionInvalida, HeapVacio {
+		
+		Clase clasesConMayorProdHab[] = new Clase[20];
+		
+		MyHeap<Integer, Clase> heapClases = new Heap<>(nombresClases.size(), 1);
+		
+		for (int i = 0; i < nombresClases.size(); i++) {
+
+			int cantProd = clases.get(nombresClases.getElementoPorPos(i)).getCantProdHabilitados();
+
+			heapClases.insert(cantProd, clases.get(nombresClases.getElementoPorPos(i)));
+		}
+		
+		for (int n = 0; n < 10; n++) {
+			clasesConMayorProdHab[n] = heapClases.findAndDelete();
+		}
+		
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Clase:" + clasesConMayorProdHab[i].getNombre() + " -- Pais:"
+					+ clasesConMayorProdHab[i].getPaisClase().getNombre() + " -- Productos Habilitados:"
+					+ clasesConMayorProdHab[i].getCantProdHabilitados());
 		}
 		
 	}
