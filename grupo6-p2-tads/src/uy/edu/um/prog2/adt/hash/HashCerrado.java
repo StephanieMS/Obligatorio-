@@ -1,5 +1,9 @@
 package uy.edu.um.prog2.adt.hash;
 
+import java.util.Iterator;
+
+import uy.edu.um.prog2.adt.iterator.MyIterator;
+
 public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> {
 	
 	private HashNode<K, V>[] vector;
@@ -187,11 +191,13 @@ public class HashCerrado<K extends Comparable<K>, V> implements HashTable<K, V> 
 	}
 
 	public int getCantElementos() {
+		
 		return cantElementos;
 	}
 	
+	public Iterator<V> iterator(){
+		
+		return new MyIterator<K,V>(vector);
+	}
 	
-	
-	
-
 }
